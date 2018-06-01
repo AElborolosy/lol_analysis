@@ -34,7 +34,7 @@ def collect_match_info(gId, api_key):
 
 
 def upload_data_to_db(df):
-    engine = create_engine('mysql+mysqlconnector://root:garzgarbear@localhost/lol_analysis')
+    engine = create_engine('mysql+mysqlconnector://agent15:bot@localhost/lol_analysis')
     connection = engine.connect()
 
     # Use a temp table to handle duplicates
