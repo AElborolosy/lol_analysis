@@ -37,7 +37,7 @@ def collect_match_info(gId, api_key):
     """Collects info on a single match and returns it in a dataframe"""
     r = requests.get('https://na1.api.riotgames.com/lol/match/v3/matches/'
                     + gId + "?api_key=" + api_key)
-    assert r.status_code == 200
+    # assert r.status_code == 200
     parsed_r = r.json()
     print(parsed_r)
     match_info_df = pd.DataFrame.from_records(parsed_r['participants'])
