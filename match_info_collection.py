@@ -17,17 +17,16 @@ def read_api_key():
 
 
 def collect_match_info(gId, api_key):
+    """Collects info on a single match and returns it in a dataframe"""
     r = requests.get('https://na1.api.riotgames.com/lol/match/v3/matches/'
                     + gId + "?api_key=" + api_key)
     parsed_r = r.json()
     match_info_df = pd.DataFrame.from_records(parsed_r['participants'])
-    print(match_info_df.head(2))
-    print(list(match_info_df))
     return match_info_df
 
 
-# Query mysql table summoner_info for the game_ids
 def load_game_ids():
+    """Query mysql table summoner_info for the game_ids"""
     engine = create_engine('mysql+mysqlconnector://agent15:bot@localhost/lol_analysis')
     connection = engine.connect()
 
@@ -57,6 +56,7 @@ def main():
     aId = '33912671'
     game_ids = load_game_ids()
     collect_match_info(gId='2796892400', api_key=key)
+
     return 0
 
 

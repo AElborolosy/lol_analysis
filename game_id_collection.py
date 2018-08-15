@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 
 
 def read_api_key():
-    # Key is stored in a text file. It has to be manually updated daily.
+    """Reads api key from text file -- update text file manually"""
     filepath = 'api_key.txt'
     file = open(filepath, 'r')
     api_key = file.read().splitlines()[0]
@@ -18,6 +18,7 @@ def read_api_key():
 
 
 def collect_game_id(aId, api_key):
+    """Returns dataframe of a given summoner's matches"""
     r = requests.get('https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/'
                     + aId + "?api_key=" + api_key)
     parsed_r = r.json()
@@ -26,6 +27,7 @@ def collect_game_id(aId, api_key):
 
 
 def upload_data_to_db(df, table):
+    """Loads a dataframe into a given database table"""
     engine = create_engine('mysql+mysqlconnector://agent15:bot@localhost/lol_analysis')
     connection = engine.connect()
 
